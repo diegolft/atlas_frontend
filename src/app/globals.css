@@ -111,14 +111,62 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  20% {
+    transform: translate(15px, -25px) scale(1.15);
+  }
+  40% {
+    transform: translate(-20px, -45px) scale(0.9);
+  }
+  60% {
+    transform: translate(10px, -30px) scale(1.08);
+  }
+  80% {
+    transform: translate(-15px, -15px) scale(0.95);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   html {
     @apply bg-black;
+    scroll-behavior: smooth;
   }
   body {
     @apply bg-black text-foreground;
   }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 18s ease-in-out infinite;
+  }
+}
+
+/* Glow nos cards ao passar o cursor */
+.card-glow-green:hover {
+  box-shadow: 0 0 28px rgba(65, 254, 179, 0.2), 0 0 56px rgba(65, 254, 179, 0.12) !important;
+}
+.card-glow-red:hover {
+  box-shadow: 0 0 28px rgba(248, 113, 113, 0.2), 0 0 56px rgba(248, 113, 113, 0.12) !important;
+}
+.card-glow-blue:hover {
+  box-shadow: 0 0 28px rgba(96, 165, 250, 0.2), 0 0 56px rgba(96, 165, 250, 0.12) !important;
+}
+.card-glow-purple:hover {
+  box-shadow: 0 0 28px rgba(192, 132, 252, 0.2), 0 0 56px rgba(192, 132, 252, 0.12) !important;
+}
+.card-glow-orange:hover {
+  box-shadow: 0 0 28px rgba(251, 146, 60, 0.2), 0 0 56px rgba(251, 146, 60, 0.12) !important;
+}
+.card-glow-amber:hover {
+  box-shadow: 0 0 28px rgba(251, 191, 36, 0.2), 0 0 56px rgba(251, 191, 36, 0.12) !important;
 }
