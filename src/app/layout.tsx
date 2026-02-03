@@ -11,8 +11,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Sistema Conexões - ERP Corporativo",
-  description: "Sistema de gestão de projetos e relatórios",
+  title: "Focus - Maximize Your Productivity",
+  description:
+    "Focus helps you achieve more by eliminating distractions and enhancing concentration",
   robots: {
     index: false,
     follow: false,
@@ -29,8 +30,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className="bg-black">
-      <body className={`${inter.variable} antialiased bg-black`}>
+    <html lang="pt-BR">
+      <body className={`${inter.variable} font-sans antialiased`}>
         <ReactQueryProvider>
           <ProtectedRoute>{children}</ProtectedRoute>
           <Toaster />

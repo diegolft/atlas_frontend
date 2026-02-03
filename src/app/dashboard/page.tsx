@@ -23,7 +23,7 @@ export default function DashboardPage() {
               variant="outline"
               onClick={handleLogout}
               disabled={logoutMutation.isPending}
-              className="bg-transparent border-slate-700 text-slate-300 hover:bg-[rgba(65,254,179)] hover:text-black active:bg-[rgba(65,254,179)] active:text-black"
+              className="bg-transparent border-slate-700 text-slate-300 hover:bg-[rgba(139,92,246)] hover:text-black active:bg-[rgba(139,92,246)] active:text-black"
             >
               {logoutMutation.isPending ? (
                 <>

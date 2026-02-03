@@ -1,6 +1,5 @@
 "use client";
 
-import { NavigationHeader } from "@/components/layout/navigation-header";
 import { PageTransition } from "@/components/layout/page-transition";
 
 export default function LoginLayout({
@@ -9,9 +8,6 @@ export default function LoginLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      <NavigationHeader />
-      <PageTransition>{children}</PageTransition>
-    </>
+    <PageTransition>{children}</PageTransition>
   );
 }

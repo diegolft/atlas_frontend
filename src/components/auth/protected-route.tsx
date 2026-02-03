@@ -16,16 +16,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
 
   useEffect(() => {
     // Check if we are on a public route
-    const publicRoutes = [
-      "/login",
-      "/register",
-      "/inicio",
-      "/produto",
-      "/planos",
-      "/feedbacks",
-      "/comparativo",
-      "/faq",
-    ];
+    const publicRoutes = ["/", "/login", "/register"];
     
     // Protected routes that require authentication
     const protectedRoutes = ["/dashboard"];
@@ -52,16 +43,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const isProtectedRoute = protectedRoutes.some((route) =>
     pathname.startsWith(route),
   );
-  const publicRoutes = [
-    "/login",
-    "/register",
-    "/inicio",
-    "/produto",
-    "/planos",
-    "/feedbacks",
-    "/comparativo",
-    "/faq",
-  ];
+  const publicRoutes = ["/", "/login", "/register"];
 
   if (
     !isAuthenticated &&

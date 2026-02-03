@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { PageBackground } from "@/components/layout/page-background";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,13 @@ import { useLogin } from "@/hooks/use-auth";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showForm, setShowForm] = useState(false);
   const loginMutation = useLogin();
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowForm(true), 250);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,7 +31,9 @@ export default function LoginPage() {
         <div className="w-full max-w-sm">
           <form
             onSubmit={handleSubmit}
-            className="rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm p-5 md:p-8 shadow-xl"
+            className={`rounded-2xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm p-5 md:p-8 shadow-xl transition-opacity duration-500 ease-out ${
+              showForm ? "opacity-100" : "opacity-0"
+            }`}
           >
             <h1 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 text-center">
               Entrar
@@ -43,7 +51,7 @@ export default function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="bg-slate-800/50 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-[rgba(65,254,179)]"
+                  className="bg-slate-800/50 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-[rgba(139,92,246)]"
                 />
               </div>
 
@@ -58,7 +66,7 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="bg-slate-800/50 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-[rgba(65,254,179)]"
+                  className="bg-slate-800/50 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-[rgba(139,92,246)]"
                 />
               </div>
             </div>
@@ -66,7 +74,7 @@ export default function LoginPage() {
             <Button
               type="submit"
               disabled={loginMutation.isPending}
-              className="w-full mt-6 bg-[rgba(65,254,179)] text-black hover:bg-[rgba(65,254,179)]/90 rounded-full py-6 font-normal"
+              className="w-full mt-6 bg-[rgba(139,92,246)] text-white hover:bg-[rgba(139,92,246)]/90 rounded-full py-6 font-normal"
             >
               {loginMutation.isPending ? (
                 <>
@@ -80,10 +88,7 @@ export default function LoginPage() {
 
             <p className="text-center text-slate-400 text-xs md:text-sm mt-4 md:mt-6">
               Não tem conta?{" "}
-              <Link
-                href="/inicio"
-                className="text-[rgba(65,254,179)] hover:underline"
-              >
+              <Link href="/" className="text-[rgba(139,92,246)] hover:underline">
                 Voltar ao início
               </Link>
             </p>
