@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   title: "Focus - Maximize Your Productivity",
   description:
     "Focus helps you achieve more by eliminating distractions and enhancing concentration",
+  icons: {
+    icon: "/focus-logo.PNG",
+  },
   robots: {
     index: false,
     follow: false,

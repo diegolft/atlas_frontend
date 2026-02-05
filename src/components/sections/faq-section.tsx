@@ -6,37 +6,39 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const faqs = [
   {
     question: "Como o Focus bloqueia distrações?",
     answer:
-      "O Focus utiliza algoritmos de IA para identificar padrões de comportamento e bloquear automaticamente aplicativos, sites e notificações que interrompem sua concentração. Você pode personalizar completamente o que é bloqueado.",
+      "O Focus entende seus padrões de uso e identifica o que mais quebra seu foco ao longo do dia. A partir disso, ele reduz estímulos desnecessários, organiza prioridades e te mantém no que realmente importa — sem você precisar configurar tudo manualmente.",
   },
   {
     question: "Posso usar o Focus em múltiplos dispositivos?",
     answer:
-      "Sim! No plano Pro, você pode sincronizar suas configurações e dados em dispositivos ilimitados. No plano Básico, o uso é limitado a um dispositivo.",
+      "Sim. Seu ambiente de foco acompanha você. Tudo fica sincronizado para que suas tarefas, rotina e progresso estejam sempre atualizados, independente do dispositivo.",
   },
   {
     question: "Meus dados estão seguros?",
     answer:
-      "Absolutamente. Todos os seus dados de produtividade são processados localmente no seu dispositivo. Nunca enviamos informações pessoais para nossos servidores. Sua privacidade é nossa prioridade.",
+      "Sim. Seus dados são seus. O Focus foi criado com privacidade como princípio, não como detalhe. As informações ficam protegidas e nunca são usadas para outros fins.",
   },
   {
     question: "Posso cancelar minha assinatura a qualquer momento?",
     answer:
-      "Sim, você pode cancelar sua assinatura a qualquer momento sem taxas ou penalidades. Você continuará tendo acesso aos recursos premium até o final do período já pago.",
+      "Pode cancelar quando quiser, sem burocracia. Sem multas, sem letras miúdas.",
   },
   {
     question: "O Focus funciona offline?",
     answer:
-      "Sim! O Focus foi projetado para funcionar completamente offline. Todas as funcionalidades de bloqueio e análise funcionam sem conexão com a internet.",
+      "Algumas funcionalidades funcionam offline, e o restante sincroniza automaticamente quando você se reconecta.",
   },
   {
     question: "Existe um período de teste gratuito?",
     answer:
-      "Oferecemos 14 dias de teste gratuito do plano Pro para novos usuários. Não é necessário cartão de crédito para começar.",
+      "Não existe plano gratuito. O Focus foi criado para quem leva o próprio tempo a sério. Ainda assim, você pode cancelar a qualquer momento se não fizer sentido pra você.",
   },
 ];
 
@@ -46,10 +48,11 @@ export function FAQSection() {
       <div className="mx-auto max-w-3xl">
         <div className="mb-16 text-center">
           <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
-            Perguntas frequentes
+            Dúvidas comuns antes de começar
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground">
-            Encontre respostas para as dúvidas mais comuns sobre o Focus.
+            Se algo ainda estiver passando pela sua cabeça, provavelmente está
+            aqui.
           </p>
         </div>
 
@@ -69,6 +72,17 @@ export function FAQSection() {
             </AccordionItem>
           ))}
         </Accordion>
+
+        <div className="mt-12 text-center">
+          <p className="mb-4 text-sm text-muted-foreground">
+            Se você chegou até aqui, já sabe que precisa disso.
+          </p>
+          <Link href="/login">
+            <Button className="bg-purple-600 text-white hover:bg-purple-700">
+              Começar agora
+            </Button>
+          </Link>
+        </div>
       </div>
     </section>
   );
