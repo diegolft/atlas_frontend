@@ -1,5 +1,6 @@
 import { PageBackground } from "@/components/layout/page-background";
 import { Header } from "@/components/layout/header";
+import { ScrollReveal } from "@/components/layout/scroll-reveal";
 import { HeroSection } from "@/components/sections/hero-section";
 import { ProductSection } from "@/components/sections/product-section";
 import { ComparisonSection } from "@/components/sections/comparison-section";
@@ -13,11 +14,21 @@ export default function Home() {
       <Header />
 
       <main>
-        <HeroSection />
-        <ProductSection />
-        <ComparisonSection />
-        <PricingSection />
-        <FAQSection />
+        <ScrollReveal initialVisible>
+          <HeroSection />
+        </ScrollReveal>
+        <ScrollReveal>
+          <ProductSection />
+        </ScrollReveal>
+        <ScrollReveal>
+          <ComparisonSection />
+        </ScrollReveal>
+        <ScrollReveal>
+          <PricingSection />
+        </ScrollReveal>
+        <ScrollReveal>
+          <FAQSection />
+        </ScrollReveal>
       </main>
 
       <Footer />
