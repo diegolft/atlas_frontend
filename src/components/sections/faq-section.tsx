@@ -77,7 +77,7 @@ export function FAQSection() {
           <p className="mb-4 text-sm text-muted-foreground">
             Se você chegou até aqui, já sabe que precisa disso.
           </p>
-          <Link href="/login">
+          <Link href="/register">
             <Button className="bg-purple-600 text-white hover:bg-purple-700">
               Começar agora
             </Button>
