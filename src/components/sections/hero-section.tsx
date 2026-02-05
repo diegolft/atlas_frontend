@@ -16,14 +16,16 @@ export function HeroSection() {
           </span>
         </div>
 
-        <h1 className="mb-6 text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
-          Você não precisa de mais disciplina.
-          <span className="block bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-transparent">
+        <h1 className="mb-6 text-balance font-bold tracking-tight text-foreground leading-normal">
+          <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+            Você não precisa de mais disciplina.
+          </span>
+          <span className="block whitespace-nowrap bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 bg-clip-text text-3xl text-transparent leading-[1.2] sm:text-4xl md:text-5xl lg:text-6xl">
             Precisa de menos distração.
           </span>
         </h1>
 
-        <p className="mx-auto mb-10 max-w-2xl text-pretty text-lg text-muted-foreground sm:text-xl">
+        <p className="mx-auto mb-10 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
           O Focus cria um ambiente de trabalho onde sua atenção para de ser
           sequestrada e você finalmente produz com clareza.
         </p>
