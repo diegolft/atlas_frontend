@@ -92,27 +92,17 @@ export function PricingSection() {
                 )}
               </div>
 
-              {plan.name === "Empresas" ? (
-                <a href="#faq">
-                  <Button
-                    className="mb-8 w-full bg-transparent border border-purple-500/30 text-foreground hover:bg-purple-500/10"
-                  >
-                    Falar com vendas
-                  </Button>
-                </a>
-              ) : (
-                <Link href="/login" className="block mb-8">
-                  <Button
-                    className={`w-full ${
-                      plan.highlighted
-                        ? "bg-purple-600 text-white hover:bg-purple-700"
-                        : "bg-transparent border border-purple-500/30 text-foreground hover:bg-purple-500/10"
-                    }`}
-                  >
-                    Começar agora
-                  </Button>
-                </Link>
-              )}
+              <Link href="/register" className="block mb-8">
+                <Button
+                  className={`w-full ${
+                    plan.highlighted
+                      ? "bg-purple-600 text-white hover:bg-purple-700"
+                      : "bg-transparent border border-purple-500/30 text-foreground hover:bg-purple-500/10"
+                  }`}
+                >
+                  Começar agora
+                </Button>
+              </Link>
 
               <ul className="space-y-3">
                 {plan.features.map((feature) => (

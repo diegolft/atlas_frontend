@@ -105,6 +105,20 @@
   animation: accordion-up 0.2s ease-out;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: oklch(0.95 0.01 285);
+  box-shadow: 0 0 0px 1000px rgb(15 23 42 / 0.5) inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
