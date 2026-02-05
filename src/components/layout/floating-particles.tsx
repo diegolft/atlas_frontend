@@ -16,6 +16,7 @@ export function FloatingParticles() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animationRef = useRef<number>(0);
+  const sizeRef = useRef({ width: 0, height: 0, dpr: 1 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -26,14 +27,15 @@ export function FloatingParticles() {
 
     const resizeCanvas = () => {
       const { clientWidth, clientHeight } = document.documentElement;
-      canvas.width = clientWidth;
-      canvas.height = clientHeight;
+      const dpr = window.devicePixelRatio || 1;
+
+      sizeRef.current = { width: clientWidth, height: clientHeight, dpr };
+      canvas.width = Math.floor(clientWidth * dpr);
+      canvas.height = Math.floor(clientHeight * dpr);
       canvas.style.width = "100%";
       canvas.style.height = "100%";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
-
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
 
     const purpleShades = [
       "rgba(147, 51, 234, 0.9)",
@@ -44,14 +46,14 @@ export function FloatingParticles() {
       "rgba(109, 40, 217, 0.85)",
     ];
 
-    const createParticles = () => {
+    const createParticles = (width: number, height: number) => {
       const particles: Particle[] = [];
-      const particleCount = Math.floor((canvas.width * canvas.height) / 5000);
+      const particleCount = Math.floor((width * height) / 5000);
 
       for (let i = 0; i < particleCount; i++) {
         particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
+          x: Math.random() * width,
+          y: Math.random() * height,
           size: Math.random() * 1.5 + 0.5,
           speedX: (Math.random() - 0.5) * 0.2,
           speedY: (Math.random() - 0.5) * 0.2,
@@ -62,19 +64,28 @@ export function FloatingParticles() {
       return particles;
     };
 
-    particlesRef.current = createParticles();
+    const refreshParticles = () => {
+      const { width, height } = sizeRef.current;
+      particlesRef.current = createParticles(width, height);
+    };
+
+    resizeCanvas();
+    refreshParticles();
+    window.addEventListener("resize", resizeCanvas);
+    window.addEventListener("resize", refreshParticles);
 
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const { width, height } = sizeRef.current;
+      ctx.clearRect(0, 0, width, height);
 
       for (const particle of particlesRef.current) {
         particle.x += particle.speedX;
         particle.y += particle.speedY;
 
-        if (particle.x < 0) particle.x = canvas.width;
-        if (particle.x > canvas.width) particle.x = 0;
-        if (particle.y < 0) particle.y = canvas.height;
-        if (particle.y > canvas.height) particle.y = 0;
+        if (particle.x < 0) particle.x = width;
+        if (particle.x > width) particle.x = 0;
+        if (particle.y < 0) particle.y = height;
+        if (particle.y > height) particle.y = 0;
 
         ctx.fillStyle = particle.color;
         ctx.globalAlpha = particle.opacity;
@@ -89,6 +100,7 @@ export function FloatingParticles() {
 
     return () => {
       window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("resize", refreshParticles);
       cancelAnimationFrame(animationRef.current);
     };
   }, []);
