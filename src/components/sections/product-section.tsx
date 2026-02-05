@@ -1,29 +1,35 @@
-import { Target, Zap, BarChart3, Shield } from "lucide-react";
+import { Target, Zap, BarChart3, Shield, Sparkles } from "lucide-react";
 
 const features = [
   {
     icon: Target,
     title: "Foco Inteligente",
     description:
-      "Algoritmos avançados identificam e eliminam distrações automaticamente.",
+      "O Focus entende quando você precisa de silêncio e reduz distrações sem você pensar nisso.",
   },
   {
     icon: Zap,
-    title: "Modo Turbo",
+    title: "Modo Profundo",
     description:
-      "Ative sessões intensivas de trabalho com bloqueio total de interrupções.",
+      "Períodos de trabalho sem interrupções, para entrar no estado de foco real.",
+  },
+  {
+    icon: Sparkles,
+    title: "Ambiente de foco guiado",
+    description:
+      "Um espaço limpo e consistente para você manter o ritmo sem esforço.",
+    featured: true,
   },
   {
     icon: BarChart3,
-    title: "Análise Profunda",
+    title: "Clareza de Progresso",
     description:
-      "Relatórios detalhados sobre seus padrões de produtividade e progresso.",
+      "Veja onde sua energia rende mais e pare de trabalhar no escuro.",
   },
   {
     icon: Shield,
-    title: "Privacidade Total",
-    description:
-      "Seus dados nunca saem do seu dispositivo. Segurança em primeiro lugar.",
+    title: "Privacidade por padrão",
+    description: "Seus dados são seus. Sem coleta abusiva, sem ruído.",
   },
 ];
 
@@ -41,13 +47,17 @@ export function ProductSection() {
           </p>
         </div>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
           {features.map((feature) => {
             const Icon = feature.icon;
             return (
               <div
                 key={feature.title}
-                className="group rounded-2xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-purple-500/50 hover:bg-purple-500/5"
+                className={`group rounded-2xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-purple-500/50 hover:bg-purple-500/5 ${
+                  feature.featured
+                    ? "border-purple-500/60 bg-purple-500/10 shadow-lg shadow-purple-500/10"
+                    : ""
+                }`}
               >
                 <div className="mb-4 inline-flex rounded-xl bg-purple-500/10 p-3 text-purple-400 transition-colors group-hover:bg-purple-500/20">
                   <Icon className="h-6 w-6" />
@@ -67,17 +77,17 @@ export function ProductSection() {
           <div className="grid items-center gap-8 lg:grid-cols-2">
             <div>
               <h3 className="mb-4 text-2xl font-bold text-foreground sm:text-3xl">
-                Interface intuitiva e elegante
+                Uma interface feita para não atrapalhar seu foco
               </h3>
               <p className="mb-6 text-muted-foreground">
-                Desenvolvido com foco na experiência do usuário. Cada elemento
-                foi pensado para minimizar fricção e maximizar resultados.
+                Tudo foi desenhado para você entender onde está, o que fazer e
+                seguir trabalhando sem pensar nisso.
               </p>
               <ul className="space-y-3">
                 {[
-                  "Temas escuro e claro",
-                  "Atalhos de teclado personalizáveis",
-                  "Sincronização entre dispositivos",
+                  "Visual confortável para longas horas de uso",
+                  "Menos cliques. Menos interrupções no fluxo de trabalho",
+                  "Continue de onde parou, em qualquer dispositivo",
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3">
                     <div className="h-2 w-2 rounded-full bg-purple-500" />

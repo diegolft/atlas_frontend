@@ -9,8 +9,6 @@ interface ScrollRevealProps {
   initialVisible?: boolean;
   /** Atraso em ms antes de iniciar a animação */
   delay?: number;
-  /** Lado de onde o conteúdo entra: esquerda ou direita */
-  direction?: "left" | "right";
 }
 
 export function ScrollReveal({
@@ -18,32 +16,41 @@ export function ScrollReveal({
   className = "",
   initialVisible = false,
   delay = 0,
-  direction = "left",
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [isVisible, setIsVisible] = useState(initialVisible);
-  const [hasAnimated, setHasAnimated] = useState(initialVisible);
+  const [scrollDirection, setScrollDirection] = useState<"up" | "down">("down");
 
   useEffect(() => {
-    if (initialVisible) return;
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      setScrollDirection(currentY > lastY ? "down" : "up");
+      lastY = currentY;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
+  useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          if (hasAnimated) break;
-          if (delay > 0) {
-            timerRef.current = setTimeout(() => {
+          if (entry.isIntersecting) {
+            if (delay > 0) {
+              timerRef.current = setTimeout(() => {
+                setIsVisible(true);
+              }, delay);
+            } else {
               setIsVisible(true);
-              setHasAnimated(true);
-            }, delay);
+            }
           } else {
-            setIsVisible(true);
-            setHasAnimated(true);
+            if (timerRef.current) clearTimeout(timerRef.current);
+            setIsVisible(false);
           }
           break;
         }
@@ -59,17 +66,17 @@ export function ScrollReveal({
       observer.disconnect();
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [initialVisible, delay, hasAnimated]);
+  }, [delay]);
 
   const hiddenTranslate =
-    direction === "left" ? "-translate-x-12" : "translate-x-12";
+    scrollDirection === "down" ? "translate-y-8" : "-translate-y-8";
 
   return (
     <div
       ref={ref}
       className={`transition-all duration-700 ease-out ${
         isVisible
-          ? "opacity-100 translate-x-0"
+          ? "opacity-100 translate-y-0"
           : `opacity-0 ${hiddenTranslate}`
       } ${className}`}
     >

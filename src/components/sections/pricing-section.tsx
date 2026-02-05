@@ -1,47 +1,55 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
 
 const plans = [
   {
-    name: "Básico",
-    price: "Grátis",
-    description: "Para quem está começando",
+    name: "Essencial",
+    price: "R$ 14,90",
+    period: "/mês",
+    description: "Para organizar a cabeça e o dia.",
     features: [
-      "Bloqueio básico de distrações",
-      "Relatórios semanais",
-      "1 dispositivo",
-      "Suporte por email",
+      "Organização de tarefas e rotinas",
+      "Controle básico de foco",
+      "Visão simples de produtividade",
+      "Check-in mental diário",
+      "IA central ativa",
     ],
+    cta: "Quero começar",
+    note: "Entra fácil. Cancela difícil.",
     highlighted: false,
   },
   {
-    name: "Pro",
-    price: "R$ 29",
+    name: "Controle",
+    price: "R$ 24,90",
     period: "/mês",
-    description: "Para profissionais",
+    description: "Para quem quer parar de se sentir perdido.",
     features: [
-      "Bloqueio inteligente com IA",
-      "Relatórios em tempo real",
-      "Dispositivos ilimitados",
-      "Suporte prioritário 24/7",
-      "Integrações avançadas",
-      "Modo offline completo",
+      "Inclui tudo do Essencial +",
+      "Análise de padrões de comportamento",
+      "Monitoramento contínuo de foco e energia",
+      "Gestão financeira pessoal",
+      "Relatórios semanais claros",
+      "Sugestões inteligentes da IA",
     ],
+    cta: "Quero ter controle",
+    note: "Aqui a pessoa sente: isso já tá valendo mais do que eu pago.",
     highlighted: true,
   },
   {
-    name: "Empresas",
-    price: "Personalizado",
-    description: "Para equipes",
+    name: "Alta Performance",
+    price: "R$ 39,90",
+    period: "/mês",
+    description: "Para quem leva a vida a sério.",
     features: [
-      "Tudo do plano Pro",
-      "Painel administrativo",
-      "Relatórios de equipe",
-      "SSO e SAML",
-      "API dedicada",
-      "Gerente de conta",
+      "Inclui tudo do Controle +",
+      "Análise psicológica mais profunda",
+      "Planejamento estratégico de semanas e meses",
+      "Projeções financeiras simples",
+      "Relatórios avançados de evolução",
+      "Ajustes automáticos de rotina",
     ],
+    cta: "Quero alta performance",
+    note: "Não é pra todos. É pra quem não aceita viver no caos.",
     highlighted: false,
   },
 ];
@@ -52,30 +60,24 @@ export function PricingSection() {
       <div className="mx-auto max-w-7xl">
         <div className="mb-16 text-center">
           <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
-            Planos para cada necessidade
+            Quanto vale ter controle real do seu foco?
           </h2>
           <p className="mx-auto max-w-2xl text-muted-foreground">
-            Escolha o plano ideal para você ou sua equipe. Cancele a qualquer
-            momento.
+            Não é sobre acesso. É sobre mudar a forma como você trabalha todos os
+            dias.
           </p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-6 lg:grid-cols-3">
           {plans.map((plan) => (
             <div
               key={plan.name}
-              className={`relative overflow-hidden rounded-2xl border p-8 transition-all duration-300 ${
+              className={`relative overflow-hidden rounded-2xl border p-6 lg:p-7 transition-all duration-300 ${
                 plan.highlighted
-                  ? "border-purple-500 bg-gradient-to-b from-purple-500/10 to-transparent"
+                  ? "border-purple-500/70 bg-purple-500/10 shadow-lg shadow-purple-500/10"
                   : "border-border/50 bg-card/30 hover:border-purple-500/30"
               }`}
             >
-              {plan.highlighted && (
-                <div className="absolute top-0 right-0 rounded-bl-xl bg-purple-500 px-4 py-1 text-xs font-medium text-white">
-                  Popular
-                </div>
-              )}
-
               <h3 className="mb-2 text-xl font-semibold text-foreground">
                 {plan.name}
               </h3>
@@ -92,40 +94,28 @@ export function PricingSection() {
                 )}
               </div>
 
-              {plan.name === "Empresas" ? (
-                <a href="#faq">
-                  <Button
-                    className="mb-8 w-full bg-transparent border border-purple-500/30 text-foreground hover:bg-purple-500/10"
-                  >
-                    Falar com vendas
-                  </Button>
-                </a>
-              ) : (
-                <Link href="/login" className="block mb-8">
-                  <Button
-                    className={`w-full ${
-                      plan.highlighted
-                        ? "bg-purple-600 text-white hover:bg-purple-700"
-                        : "bg-transparent border border-purple-500/30 text-foreground hover:bg-purple-500/10"
-                    }`}
-                  >
-                    Começar agora
-                  </Button>
-                </Link>
-              )}
+              <Link href="/login" className="block mb-6">
+                <Button
+                  className={`w-full ${
+                    plan.highlighted
+                      ? "bg-purple-600 text-white hover:bg-purple-700"
+                      : "bg-transparent border border-purple-500/30 text-foreground hover:bg-purple-500/10"
+                  }`}
+                >
+                  {plan.cta}
+                </Button>
+              </Link>
 
-              <ul className="space-y-3">
+              <ul className="space-y-2">
                 {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3">
-                    <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-purple-500/20">
-                      <Check className="h-3 w-3 text-purple-400" />
-                    </div>
-                    <span className="text-sm text-muted-foreground">
-                      {feature}
-                    </span>
+                  <li key={feature} className="text-sm text-muted-foreground">
+                    {feature}
                   </li>
                 ))}
               </ul>
+              <p className="mt-4 text-sm text-muted-foreground/80">
+                {plan.note}
+              </p>
             </div>
           ))}
         </div>

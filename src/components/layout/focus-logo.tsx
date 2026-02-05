@@ -3,12 +3,12 @@ import Image from "next/image";
 export function FocusLogo({ className = "" }: { className?: string }) {
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <div className="relative h-10 w-10">
+      <div className="relative h-12 w-12">
         <Image
           src="/focus-logo.PNG"
           alt="Focus"
           fill
-          sizes="40px"
+          sizes="48px"
           className="object-contain"
           priority
         />
