@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import { apiClient } from "@/lib/api-client";
 import type { ApiResponse } from "@/types/api.types";
-import type { LoginInput, LoginResponse } from "@/types/auth.types";
+import type { LoginInput, LoginResponse, RegisterInput } from "@/types/auth.types";
 
 export const authLib = {
   login: async (data: LoginInput): Promise<LoginResponse> => {
@@ -27,6 +27,10 @@ export const authLib = {
       // Always remove cookie on client
       Cookies.remove("token");
     }
+  },
+
+  register: async (data: RegisterInput): Promise<void> => {
+    await apiClient.post("/auth/register", data);
   },
 
   isAuthenticated: (): boolean => {

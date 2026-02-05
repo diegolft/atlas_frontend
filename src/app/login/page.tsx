@@ -8,11 +8,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Spinner } from "@/components/ui/spinner";
 import { useLogin } from "@/hooks/use-auth";
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [errors, setErrors] = useState<{ email?: boolean; password?: boolean }>(
+    {},
+  );
   const loginMutation = useLogin();
 
   useEffect(() => {
@@ -22,6 +26,15 @@ export default function LoginPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const newErrors = {
+      email: !email.trim(),
+      password: !password.trim(),
+    };
+    setErrors(newErrors);
+    if (newErrors.email || newErrors.password) {
+      toast.error("Preencha os campos obrigatórios.");
+      return;
+    }
     loginMutation.mutate({ email, password });
   };
 
@@ -49,9 +62,16 @@ export default function LoginPage() {
                   type="email"
                   placeholder="seu@email.com"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="bg-slate-800/50 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-[rgba(139,92,246)]"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (errors.email) setErrors((prev) => ({ ...prev, email: false }));
+                  }}
+                  aria-invalid={errors.email}
+                  className={`bg-slate-800/50 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-[rgba(139,92,246)] ${
+                    errors.email
+                      ? "border-red-500 focus-visible:ring-red-500/40"
+                      : ""
+                  }`}
                 />
               </div>
 
@@ -64,9 +84,17 @@ export default function LoginPage() {
                   type="password"
                   placeholder="••••••••"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className="bg-slate-800/50 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-[rgba(139,92,246)]"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    if (errors.password)
+                      setErrors((prev) => ({ ...prev, password: false }));
+                  }}
+                  aria-invalid={errors.password}
+                  className={`bg-slate-800/50 border-slate-700 text-white placeholder:text-slate-500 focus-visible:ring-[rgba(139,92,246)] ${
+                    errors.password
+                      ? "border-red-500 focus-visible:ring-red-500/40"
+                      : ""
+                  }`}
                 />
               </div>
             </div>
@@ -88,8 +116,11 @@ export default function LoginPage() {
 
             <p className="text-center text-slate-400 text-xs md:text-sm mt-4 md:mt-6">
               Não tem conta?{" "}
-              <Link href="/" className="text-[rgba(139,92,246)] hover:underline">
-                Voltar ao início
+              <Link
+                href="/register"
+                className="text-[rgba(139,92,246)] hover:underline"
+              >
+                Registre-se agora
               </Link>
             </p>
           </form>
